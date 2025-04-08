@@ -3,9 +3,47 @@ import plotly.express as px
 import dash
 from dash import dcc, html, Input, Output
 
-# Load data from Excel sheet
-excel_file = "proxy_data.csv"  # Replace with your Excel file name
-df = pd.read_csv(excel_file)
+# Define the data as a list of dictionaries
+data = [
+    {"Student Name": "Havel", "Subject": "CS 391", "Study Time": "01:00:00"},
+    {"Student Name": "Havel", "Subject": "MRKT 237", "Study Time": "01:00:00"},
+    {"Student Name": "Havel", "Subject": "MTH 254", "Study Time": "02:30:00"},
+    {"Student Name": "Havel", "Subject": "PH 212", "Study Time": "03:15:00"},
+    {"Student Name": "Josh", "Subject": "WR 121", "Study Time": "01:00:00"},
+    {"Student Name": "Josh", "Subject": "BA 348", "Study Time": "02:30:00"},
+    {"Student Name": "Josh", "Subject": "CS 340", "Study Time": "03:15:00"},
+    {"Student Name": "Josh", "Subject": "BANA 270", "Study Time": "01:00:00"},
+    {"Student Name": "Kai", "Subject": "CS 162", "Study Time": "05:20:00"},
+    {"Student Name": "Kai", "Subject": "MTH 251", "Study Time": "04:00:00"},
+    {"Student Name": "Kai", "Subject": "MRKT 237", "Study Time": "05:20:00"},
+    {"Student Name": "Kai", "Subject": "CS 271", "Study Time": "04:00:00"},
+    {"Student Name": "Omori", "Subject": "MTH 251", "Study Time": "03:15:00"},
+    {"Student Name": "Omori", "Subject": "CS 162", "Study Time": "02:00:00"},
+    {"Student Name": "Omori", "Subject": "AI 537", "Study Time": "03:15:00"},
+    {"Student Name": "Omori", "Subject": "AI 541", "Study Time": "02:00:00"},
+    {"Student Name": "Owen", "Subject": "BIO 101", "Study Time": "00:10:00"},
+    {"Student Name": "Owen", "Subject": "CS 271", "Study Time": "01:00:00"},
+    {"Student Name": "Owen", "Subject": "MTH 361", "Study Time": "05:00:00"},
+    {"Student Name": "Owen", "Subject": "BA 348", "Study Time": "00:10:00"},
+    {"Student Name": "Paul", "Subject": "CS 340", "Study Time": "01:00:00"},
+    {"Student Name": "Paul", "Subject": "BANA 270", "Study Time": "05:00:00"},
+    {"Student Name": "Paul", "Subject": "BANA 372", "Study Time": "02:00:00"},
+    {"Student Name": "Paul", "Subject": "MTH 241", "Study Time": "01:00:00"},
+    {"Student Name": "Paul", "Subject": "BANA 472", "Study Time": "02:00:00"},
+    {"Student Name": "Paul", "Subject": "BA 348", "Study Time": "01:00:00"},
+    {"Student Name": "Tri", "Subject": "CS 340", "Study Time": "04:00:00"},
+    {"Student Name": "Tri", "Subject": "BANA 270", "Study Time": "04:00:00"},
+    {"Student Name": "Vi", "Subject": "MTH 241", "Study Time": "02:30:00"},
+    {"Student Name": "Vi", "Subject": "BANA 472", "Study Time": "05:20:00"},
+    {"Student Name": "Vi", "Subject": "BA 348", "Study Time": "00:09:00"},
+    {"Student Name": "Vi", "Subject": "CS 162", "Study Time": "02:00:00"},
+    {"Student Name": "Vi", "Subject": "ENG 100", "Study Time": "02:30:00"},
+    {"Student Name": "Vi", "Subject": "BANA 450", "Study Time": "05:20:00"},
+    {"Student Name": "Vi", "Subject": "CS 271", "Study Time": "00:09:00"},
+]
+
+# Create a DataFrame from the data
+df = pd.DataFrame(data)
 
 # Convert 'Study Time' to total hours
 def convert_to_hours(time_obj):
