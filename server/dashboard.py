@@ -47,15 +47,23 @@ data = [
 
 # Create a DataFrame from the data
 df = pd.DataFrame(data)
+
 # Convert 'Study Time' to total hours
 def convert_to_hours(time_obj):
     if isinstance(time_obj, str):
         h, m, s = map(int, time_obj.split(':'))
     else:
         h, m, s = time_obj.hour, time_obj.minute, time_obj.second
-    return h + m / 60 + s / 3600
+    return h + m / 60 + s / 3600                                                                         
 
 df['StudyTime(Hours)'] = df['Study Time'].apply(convert_to_hours)
+     
+# Define a list of colors
+colors = ['#646363', '#424242', '#212121']
+
+# Ensure there are enough colors for all students by cycling through the list
+unique_students = df['Student Name'].unique()
+student_colors = {student: colors[i % len(colors)] for i, student in enumerate(unique_students)}
 
 # Function to create the Dash app
 def create_dashboard(flask_app):
@@ -81,7 +89,7 @@ def create_dashboard(flask_app):
     def update_study_time_chart(selected_student):
         filtered_df = df[df['Student Name'] == selected_student]
         fig = px.bar(filtered_df, x='Subject', y='StudyTime(Hours)', title=f"Study Time for {selected_student}",
-                     color_discrete_sequence=['#2d2d2d'])  # Set bar color to charcoal grey
+                     color_discrete_sequence=[student_colors[selected_student]])  # Set bar color to student's color
         return fig
 
     @dash_app.callback(
@@ -92,7 +100,7 @@ def create_dashboard(flask_app):
         student_totals = df.groupby('Student Name')['StudyTime(Hours)'].sum().reset_index()
         student_totals = student_totals.sort_values(by='StudyTime(Hours)', ascending=False)
         fig = px.bar(student_totals, x='Student Name', y='StudyTime(Hours)', title="Study Time Leaderboard",
-                     color_discrete_sequence=['#2d2d2d'])  # Set bar color to charcoal grey
+                     color='Student Name', color_discrete_map=student_colors)  # Set bar color to student's color
         return fig
 
     return dash_app
