@@ -31,7 +31,9 @@ from googleapiclient.errors import HttpError
 if os.environ.get("FLASK_ENV") == "development":
     from dotenv import load_dotenv
     load_dotenv()
-
+else:
+    from dotenv import load_dotenv
+    load_dotenv()
 google_search_tool = Tool(
     google_search = GoogleSearch()
 )
