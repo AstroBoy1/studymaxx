@@ -228,7 +228,7 @@ def get_gemini_response():
     return result
 
 # Integrate the Dash app
-create_dashboard(app)
+#create_dashboard(app)
 # https://musical-rich-gorilla.ngrok-free.app
 
 if __name__ == "__main__":
