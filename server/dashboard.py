@@ -3,10 +3,7 @@ import plotly.express as px
 import dash
 from dash import dcc, html, Input, Output
 
-# Load data from Excel sheet
-# excel_file = "proxy_data.xlsx"
-# df = pd.read_excel(excel_file)
-# Define the data as a list of dictionaries
+# Define the data
 data = [
     {"Student Name": "Havel", "Subject": "CS 391", "Study Time": "01:00:00"},
     {"Student Name": "Havel", "Subject": "MRKT 237", "Study Time": "01:00:00"},
@@ -54,10 +51,10 @@ def convert_to_hours(time_obj):
         h, m, s = map(int, time_obj.split(':'))
     else:
         h, m, s = time_obj.hour, time_obj.minute, time_obj.second
-    return h + m / 60 + s / 3600                                                                         
+    return h + m / 60 + s / 3600
 
 df['StudyTime(Hours)'] = df['Study Time'].apply(convert_to_hours)
-     
+
 # Define a list of colors
 colors = ['#646363', '#424242', '#212121']
 
