@@ -1,0 +1,25 @@
+{
+  "position": { "x": 0, "y": 0 },
+  "initialNodes": [
+    {
+      "id": "CS161",
+      "type": "input",
+      "data": { "label": "161 - Intro to Computer Science I" },
+      "position": { "x": 0, "y": 0 },
+      "taken": false
+    },
+    {
+      "id": "CS225",
+      "type": "input",
+      "data": { "label": "225 - Discrete Structures in Computer Science" },
+      "position": { "x": 0, "y": 0 },
+      "taken": false
+    }
+  ],
+  "initialEdges": [
+    { "id": "eCS161-CS162", "source": "CS161", "target": "CS162", "type": "smoothstep" },
+    { "id": "eCS161-CS271", "source": "CS161", "target": "CS271", "type": "smoothstep" },
+    { "id": "eCS161-CS352", "source": "CS161", "target": "CS352", "type": "smoothstep" },
+    { "id": "eCS162-CS290", "source": "CS162", "target": "CS290", "type": "smoothstep" }
+  ]
+}
