@@ -1,0 +1,17 @@
+Flask
+pytest
+requests
+gunicorn
+Werkzeug
+python-dotenv
+firebase-admin
+pandas
+plotly
+openpyxl
+dash
+google
+groq
+flask_cors
+google-auth
+google-auth-oauthlib
+google-api-python-client
