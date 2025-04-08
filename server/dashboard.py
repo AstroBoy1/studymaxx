@@ -24,10 +24,9 @@ colors = ['#646363', '#424242', '#212121']
 unique_students = df['Student Name'].unique()
 student_colors = {student: colors[i % len(colors)] for i, student in enumerate(unique_students)}
 
-# Initialize the Dash app
-#app = dash.Dash(__name__)
 def create_dashboard(flask_app):
     dash_app = dash.Dash(__name__, server=flask_app, url_base_pathname='/dashboard/')
+
     dash_app.layout = html.Div([
         html.Div([
             html.Label("Select Student:"),
@@ -48,7 +47,7 @@ def create_dashboard(flask_app):
     def update_study_time_chart(selected_student):
         filtered_df = df[df['Student Name'] == selected_student]
         fig = px.bar(filtered_df, x='Subject', y='StudyTime(Hours)', title=f"Study Time for {selected_student}",
-                    color_discrete_sequence=[student_colors[selected_student]])  # Use the student's assigned color
+                     color_discrete_sequence=[student_colors[selected_student]])  # Use the student's assigned color
         return fig
 
     @dash_app.callback(
@@ -59,10 +58,11 @@ def create_dashboard(flask_app):
         student_totals = df.groupby('Student Name')['StudyTime(Hours)'].sum().reset_index()
         student_totals = student_totals.sort_values(by='StudyTime(Hours)', ascending=False)
         fig = px.bar(student_totals, x='Student Name', y='StudyTime(Hours)', title="Study Time Leaderboard",
-                    color='Student Name', color_discrete_map=student_colors)  # Use the color mapping for all students
+                     color='Student Name', color_discrete_map=student_colors)  # Use the color mapping for all students
         return fig
+
     return dash_app
 
-# if __name__ == '__main__':
-#     print("Starting Dash application...")
-#     app.run(debug=True)
+if __name__ == '__main__':
+    print("Starting Dash application...")
+    app.run(debug=True)
